@@ -7,8 +7,10 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
-	<uses-permission android:name="android.permission.VIBRATE"></uses-permission>
+
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.VIBRATE" >
+    </uses-permission>
 
     <application
         android:allowBackup="true"
@@ -37,10 +39,30 @@
             android:name=".ScreenLockActivity"
             android:label="@string/title_activity_screen_lock"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-            <intent-filter >
-	            <category android:name="android.intent.category.HOME" />
+            <intent-filter>
+                <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </activity>
+        
+    	<activity
+      		android:name=".LoginActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <activity
+            android:name=".SetPasswordActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <activity
+            android:name=".LocusMainActivity"
+            android:label="@string/title_activity_locus_main"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" >
+        </activity>
+        
     </application>
 
 </manifest>

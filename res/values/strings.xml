@@ -6,5 +6,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_screen_lock">ScreenLockActivity</string>
     <string name="hint_unlock">向右滑动解锁</string>
+    <string name="title_activity_locus_main">LocusMainActivity</string>
 
 </resources>

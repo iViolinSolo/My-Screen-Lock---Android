@@ -34,6 +34,17 @@ public class MainActivity extends Activity {
 				return false;
 			}
 		});
+		
+		Button btnStart = (Button) findViewById(R.id.button2);
+		btnStart.setOnLongClickListener(new OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View v) {
+				Intent intent = new Intent(MainActivity.this, LocusMainActivity.class);
+				startActivity(intent);
+				return false;
+			}
+		});
 	}
 
 	@Override
