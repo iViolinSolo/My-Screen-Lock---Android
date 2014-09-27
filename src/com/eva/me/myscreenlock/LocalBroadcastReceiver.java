@@ -22,7 +22,9 @@ public class LocalBroadcastReceiver extends BroadcastReceiver{
 			}
 			
 		}else if (intentAction.equals(""+Intent.ACTION_SCREEN_OFF)) {
-			
+			if (ScreenLockActivity.isShow) {
+				ScreenLockActivity.isShow = false;
+			}
 		}
 	}
 
