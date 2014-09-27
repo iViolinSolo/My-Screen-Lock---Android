@@ -1,5 +1,6 @@
 package com.eva.me.myscreenlock;
 
+import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,6 +15,8 @@ public class LocalBroadcastReceiver extends BroadcastReceiver{
 		String intentAction = intent.getAction();
 		Log.e(TAG, "The Intent Action is: "+intentAction);
 		
+		Log.e(TAG, "The Restart label isShow is: "+ScreenLockActivity.isShow);
+		
 		if(intentAction.equals(""+Intent.ACTION_SCREEN_ON)) {
 			if (!ScreenLockActivity.isShow) {
 				Intent tempIntent = new Intent(context, ScreenLockActivity.class);
@@ -23,7 +26,10 @@ public class LocalBroadcastReceiver extends BroadcastReceiver{
 			
 		}else if (intentAction.equals(""+Intent.ACTION_SCREEN_OFF)) {
 			if (ScreenLockActivity.isShow) {
-				ScreenLockActivity.isShow = false;
+				if (ScreenLockActivity.getInstance() != null) {
+					((Activity) ScreenLockActivity.getInstance()).finish();
+//					ScreenLockActivity.isShow = false;
+				}
 			}
 		}
 	}

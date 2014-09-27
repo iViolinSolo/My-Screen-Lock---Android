@@ -1,16 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/cfa7jw1dy4zsxpyf6j"
-    android:orientation="vertical" >
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" >
 
-    <Button
-        android:id="@+id/btn_nulock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="解锁" />
-
-    <com.eva.me.myscreenlock.SliderRelativeLayout android:id="@+id/slider_layout"
+	<com.qin.zdlock.SliderRelativeLayout android:id="@+id/slider_layout"
 	    android:layout_width="fill_parent"
 		android:layout_height="63dip" 
 		android:layout_gravity="center"
@@ -56,5 +49,6 @@
 		</TextView>
 
 
-	</com.eva.me.myscreenlock.SliderRelativeLayout>
+	</com.qin.zdlock.SliderRelativeLayout>
+
 </LinearLayout>
