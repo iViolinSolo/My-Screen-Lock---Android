@@ -3,6 +3,7 @@ package com.eva.me.myscreenlock;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,9 +16,11 @@ import com.eva.me.myscreenlock.util.StatusUtil;
 public class LoginActivity extends Activity {
 	private static final String TAG = "LoginActivity";
 	public static final String AUTHENTICATION_SUCCESS= "AuthenticationSuccess";
+	public static Handler mainHandler = null;
 	private LocusPassWordView lpwv;
 	private Toast toast;
 	private int operation = -1;
+	
 
 	private void showToast(CharSequence message) {
 		if (null == toast) {
@@ -47,7 +50,7 @@ public class LoginActivity extends Activity {
 			public void onComplete(String mPassword) {
 				
 				switch (operation) {
-				case LocusMainActivity.OP_CLOSE_LOCK:
+				case LocusMainActivity.OP_CLOSE_LOCK://进入
 					Log.e(TAG, "CASE: LocusMainActivity.OP_CLOSE_LOCK");
 					
 					// 如果密码正确,则进入主页面。
@@ -65,6 +68,22 @@ public class LoginActivity extends Activity {
 					
 					break;
 
+				case ScreenLockActivity.OP_EXIT_SCREEN:
+					// 如果密码正确,直接解锁。
+					if (lpwv.verifyPassword(mPassword)) {
+						if(mainHandler != null) {
+							mainHandler.obtainMessage(ScreenLockActivity.MSG_AUTHENTICATION_SUCCESS).sendToTarget();
+						}else {
+							Log.e(TAG, "UNKONWN ERROR -> mianHandler is null");
+						}
+						showToast("解锁成功");
+						finish();
+					} else {
+						showToast("密码输入错误,请重新输入");
+						lpwv.markError();
+					}
+					break;
+					
 				case -1:
 					Log.e(TAG, "UNKONWN ERROR: -1");
 					break;

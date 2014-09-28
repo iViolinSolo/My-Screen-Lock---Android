@@ -2,7 +2,9 @@ package com.eva.me.myscreenlock;
 
 import com.eva.me.myscreenlock.SliderRelativeLayout;
 import com.eva.me.myscreenlock.R;
+import com.eva.me.myscreenlock.util.StatusUtil;
 
+import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 
 public class ScreenLockActivity extends Activity {
 	public static final String TAG = "ScreenLockActivity";
+	public static final int OP_EXIT_SCREEN = 2;
 //	private static final int FLAG_HOMEKEY_DISPATCHED = 0x80000000;//屏蔽home键
 	private Button btn_test;
 	public static boolean isShow = false;//防止重复开启这个activity
@@ -36,6 +39,8 @@ public class ScreenLockActivity extends Activity {
     private static Context mContext = null ;
 	
     public static int MSG_LOCK_SUCESS = 1;
+	public static int MSG_AUTHENTICATION_SUCCESS = 2;
+    
   //--loop--slide unlock
     
     public static  Context getInstance() {
@@ -113,8 +118,25 @@ public class ScreenLockActivity extends Activity {
 			
 			Log.i(TAG, "handleMessage :  #### " );
 			
-			if(MSG_LOCK_SUCESS == msg.what)
+			if(MSG_LOCK_SUCESS == msg.what) {
+				
+				boolean isOn = false;
+				isOn = StatusUtil.getStatus(ScreenLockActivity.this);
+				if (isOn) {
+					LoginActivity.mainHandler = mHandler;
+					Intent intToLogin = new Intent();
+					intToLogin.putExtra("operation", ScreenLockActivity.OP_EXIT_SCREEN);
+					intToLogin.setClass(ScreenLockActivity.this, LoginActivity.class);
+					startActivity(intToLogin);
+				} else {
+					Toast.makeText(mContext, "解锁成功", Toast.LENGTH_SHORT).show();
+					finish(); // 锁屏成功时，结束我们的Activity界面
+				}
+
+			}else if (MSG_AUTHENTICATION_SUCCESS == msg.what) {
+				Toast.makeText(mContext, "解锁成功", Toast.LENGTH_SHORT).show();
 				finish(); // 锁屏成功时，结束我们的Activity界面
+			}
 		}
 	};
 	//--Start--slide unlock

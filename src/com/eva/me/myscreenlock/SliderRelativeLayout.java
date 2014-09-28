@@ -128,7 +128,7 @@ public class SliderRelativeLayout extends RelativeLayout {
 		boolean isSucess= Math.abs(x - getRight()) <= 15 ;
 		
 		if(isSucess){
-		   Toast.makeText(mContext, "解锁成功", 1000).show();
+//		   Toast.makeText(mContext, "解锁成功", 1000).show();
 		   resetViewState();	
 		   virbate(); //震动一下
 		   //结束我们的主Activity界面
