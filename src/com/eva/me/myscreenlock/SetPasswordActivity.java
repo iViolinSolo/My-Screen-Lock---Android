@@ -64,7 +64,7 @@ public class SetPasswordActivity extends Activity {
 						lpwv.clearPassword();
 						showToast("密码修改成功,请记住密码.");
 						startActivity(new Intent(SetPasswordActivity.this,
-								LoginActivity.class));
+								LocusMainActivity.class));
 						finish();
 					} else {
 						lpwv.clearPassword();

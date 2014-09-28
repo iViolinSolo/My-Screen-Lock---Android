@@ -2,10 +2,16 @@ package com.eva.me.myscreenlock;
 
 import com.eva.me.myscreenlock.R;
 import com.eva.me.myscreenlock.SetPasswordActivity;
+import com.eva.me.myscreenlock.util.StatusUtil;
+import com.eva.me.myscreenlock.util.StringUtil;
 
+import android.R.integer;
+import android.R.string;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.net.wifi.WifiConfiguration.Status;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,11 +20,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LocusMainActivity extends Activity {
 	private static final String TAG = "LocusMainActivity";
-	private TextView btnSwitch;
+	public static final int OP_CLOSE_LOCK = 1;
+	public static String  name =  "com.eva.me.myscreenlock.LocusMainActivity";
+	private TextView btnSwitch, btnReset;
 	private String password = "";
+	public static boolean isOn = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +42,13 @@ public class LocusMainActivity extends Activity {
 		password = this.getPassword();
 		Log.e(TAG, "PASSWORD is : "+password);
 		
-		View v = (View) this.findViewById(R.id.tvReset);
-		v.setOnClickListener(new OnClickListener() {
+		LocusMainActivity.name = this.getClass().getName();
+		
+		LocusMainActivity.isOn = StatusUtil.getStatus(this);
+		Log.e(TAG, "isOn status: "+isOn);
+		
+		btnReset = (TextView) this.findViewById(R.id.tvReset);
+		btnReset.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(LocusMainActivity.this,
@@ -45,15 +60,66 @@ public class LocusMainActivity extends Activity {
 		});
 		
 		btnSwitch = (TextView) findViewById(R.id.tvSwitch);
+		//重新绘制button
+		if (LocusMainActivity.isOn) {
+			//开启了密码锁屏
+			btnSwitch.setText("关闭密码锁屏功能");
+			btnReset.setVisibility(View.VISIBLE);
+		}else if (!LocusMainActivity.isOn ||  password.equals(LoginActivity.AUTHENTICATION_SUCCESS)) {
+			//如果处于本身就是关闭状态，或者是验证成功之后，就可以直接绘制图片为关闭状态，同时初始化密码
+			//关闭了密码锁屏
+			btnSwitch.setText("打开密码锁屏功能");
+			btnReset.setVisibility(View.GONE);
+			//重新赋值为空值
+			password = "";
+			resetPassWord(password);
+		}
 		btnSwitch.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				btnSwitch.setText("关闭锁屏");
+				//单机之后改变状态
+				if (LocusMainActivity.isOn) {
+					//首先检查是否存在密码，存在，先输入密码，验证通过后才能关闭密码锁屏
+					//跳转至Login 进行验证，同时将进行的操作的参数穿进去
+					if(StringUtil.isNotEmpty(getPassword())) {
+						Intent intToLogin = new Intent();
+						intToLogin.putExtra("operation", LocusMainActivity.OP_CLOSE_LOCK);
+						intToLogin.setClass(LocusMainActivity.this, LoginActivity.class);
+						startActivity(intToLogin);
+						Log.e(TAG, "hhhhhhhhere");
+						return;//把当前的activity进程进行关闭，最后成功之后跳转回来，在处理相应请求，如果输入密码成功了，就可以把密码设成一个独特的值，前面判断，就可以关闭了
+					}
+					
+					//不存在密码，直接绘制成空
+					//现在关闭密码锁屏,绘制上面图片
+					StatusUtil.setStatus(false, LocusMainActivity.this);
+					LocusMainActivity.isOn = false;
+					btnSwitch.setText("打开密码锁屏功能");
+					Toast.makeText(LocusMainActivity.this, "密码锁屏功能关闭，需要时请重新打开", Toast.LENGTH_SHORT).show();
+					btnReset.setVisibility(View.GONE);
+					//绘制完成，就要进行密码的设为空
+					resetPassWord("");
+					
+				}else if (!LocusMainActivity.isOn) {
+					//现在打开密码锁屏
+					StatusUtil.setStatus(true, LocusMainActivity.this);
+					LocusMainActivity.isOn = true;
+					btnSwitch.setText("关闭密码锁屏功能");
+					Toast.makeText(LocusMainActivity.this, "密码锁屏功能已经开启", Toast.LENGTH_SHORT).show();
+					btnReset.setVisibility(View.VISIBLE);
+					
+				}else {
+					Log.e(TAG, "UNKOWN ERROR! ");
+				}
+				
 			}
 		});
 		
+		
+		
 	}
+	
 	
 	/**
 	 * 取得密码
@@ -66,7 +132,54 @@ public class LocusMainActivity extends Activity {
 		Log.e(TAG, "NAME : "+LocusPassWordView.name);
 		return settings.getString("password", ""); // , "0,1,2,3,4,5,6,7,8"
 	}
+	
+	/**
+	 * 设置密码
+	 * 
+	 * @param password
+	 */
+	public void resetPassWord(String password) {
+		SharedPreferences settings = this.getSharedPreferences(
+				LocusPassWordView.name, 0);
+		Editor editor = settings.edit();
+		editor.putString("password", password);
+		editor.commit();
+	}
 
+	@Override
+	protected void onPause() {
+		Log.e(TAG, "onPause");
+		super.onPause();
+	}
+	
+	@Override
+	protected void onStop() {
+		Log.e(TAG, "onStop");
+		super.onStop();
+	}
+	
+	@Override
+	protected void onResume() {
+		Log.e(TAG, "onResume");
+		LocusMainActivity.isOn = StatusUtil.getStatus(LocusMainActivity.this);
+				
+		//重新绘制
+		if (LocusMainActivity.isOn) {
+			//开启了密码锁屏
+			btnSwitch.setText("关闭密码锁屏功能");
+			btnReset.setVisibility(View.VISIBLE);
+		}else if (!LocusMainActivity.isOn ||  password.equals(LoginActivity.AUTHENTICATION_SUCCESS)) {
+			//如果处于本身就是关闭状态，或者是验证成功之后，就可以直接绘制图片为关闭状态，同时初始化密码
+			//关闭了密码锁屏
+			btnSwitch.setText("打开密码锁屏功能");
+			btnReset.setVisibility(View.GONE);
+			//重新赋值为空值
+			password = "";
+			resetPassWord(password);
+		}
+		super.onResume();
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
