@@ -47,12 +47,14 @@
     	<activity
       		android:name=".LoginActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+        	android:theme="@android:style/Theme.Light.NoTitleBar"
             android:screenOrientation="portrait" >
         </activity>
         
         <activity
             android:name=".SetPasswordActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+        	android:theme="@android:style/Theme.Light.NoTitleBar"
             android:screenOrientation="portrait" >
         </activity>
         
@@ -60,6 +62,7 @@
             android:name=".LocusMainActivity"
             android:label="@string/title_activity_locus_main"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+        	android:theme="@android:style/Theme.Light.NoTitleBar"
             android:screenOrientation="portrait" >
         </activity>
         

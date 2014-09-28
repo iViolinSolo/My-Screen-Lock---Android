@@ -14,16 +14,29 @@
         android:layout_gravity="center"
         android:padding="10dip"
         android:textColor="@android:color/background_light"
-        android:text="欢迎进入主界面" >
+        android:text="欢迎进入九宫格密码设置界面" >
     </TextView>
 
+    <TextView
+        android:id="@+id/tvOpen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_selector"
+        android:text="打开锁屏" >
+    </TextView>
+    
     <TextView
         android:id="@+id/tvReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-         android:paddingLeft="15dip"
+        android:paddingLeft="15dip"
         android:paddingRight="15dip"
         android:textColor="@android:color/white"
         android:background="@drawable/button_selector"

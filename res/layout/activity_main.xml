@@ -51,7 +51,7 @@
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="启动九宫格锁屏" />
+                android:text="九宫格锁屏设置" />
         </FrameLayout>
     </LinearLayout>
 

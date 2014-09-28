@@ -2,7 +2,6 @@ package com.eva.me.myscreenlock.util;
 
 /**
  * 密码内容操作
- * @author Crazy24k@gmail.com
  * 
  */
 public class StringUtil {
