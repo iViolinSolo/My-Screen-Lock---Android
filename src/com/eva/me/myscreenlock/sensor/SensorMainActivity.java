@@ -5,6 +5,8 @@ import java.util.Calendar;
 import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -19,12 +21,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eva.me.myscreenlock.LocusPassWordView;
+import com.eva.me.myscreenlock.LoginActivity;
 import com.eva.me.myscreenlock.R;
+import com.eva.me.myscreenlock.util.StringUtil;
 
 
 public class SensorMainActivity extends Activity implements SensorEventListener {
 
 	private static final String TAG = SensorMainActivity.class.getSimpleName();
+	public static final int OP_VALIDATE_PSD = 3;
 	private SensorManager mSensorManager;
 	private Sensor mSensor;
 	private TextView textviewX;
@@ -36,6 +42,7 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 	
 	private Intent staSerIntent =null;
 	
+	public static boolean validateSuccess = false;
 	public static boolean isOn = false;
 	public static boolean initialTime = true;
 	
@@ -63,7 +70,6 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 		initialText();
 		
 		
-		
 		mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);// TYPE_GRAVITY
 		if (null == mSensorManager) {
@@ -79,6 +85,12 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 			public void onClick(View v) {
 				if (!isOn) {
 					//是关闭状态的时候
+					if (StringUtil.isEmpty(getPassword())) {
+						//空密码 需要重设密码才能使用这项功能
+						Toast.makeText(SensorMainActivity.this, "你需要先设置密码才能使用这项功能", Toast.LENGTH_SHORT).show();
+						return;
+					}
+					
 					btn_switch.setText("关闭防盗");
 					Toast.makeText(SensorMainActivity.this, "防盗功能开启~", Toast.LENGTH_SHORT).show();
 					SensorMainActivity.isOn = true;
@@ -91,16 +103,27 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 					
 				} else {
 					//是开启的状态的时候
-					//接下里关闭这项防盗功能
-					btn_switch.setText("开启防盗");
-					Toast.makeText(SensorMainActivity.this, "防盗功能关闭，需要时请重新打开", Toast.LENGTH_SHORT).show();
-					SensorMainActivity.isOn = false;
-					SensorMainActivity.initialTime = false;
-					initialText();
+					if(SensorMainActivity.validateSuccess == false) {
+						Toast.makeText(SensorMainActivity.this, "请先验证密码在进行关闭", Toast.LENGTH_SHORT).show();
+						Intent staLogin = new Intent();
+						staLogin.putExtra("operation", SensorMainActivity.OP_VALIDATE_PSD);
+						staLogin.setClass(SensorMainActivity.this, LoginActivity.class);
+						startActivity(staLogin);
+						
+					}else if (SensorMainActivity.validateSuccess == true) {
+						//接下里关闭这项防盗功能
+						SensorMainActivity.validateSuccess = false;
+						btn_switch.setText("开启防盗");
+						Toast.makeText(SensorMainActivity.this, "防盗功能关闭，需要时请重新打开", Toast.LENGTH_SHORT).show();
+						SensorMainActivity.isOn = false;
+						SensorMainActivity.initialTime = false;
+						initialText();
+						
+						startAlarmPlayService(3);
+						
+						mSensorManager.unregisterListener(SensorMainActivity.this);
+					}
 					
-					startAlarmPlayService(3);
-					
-					mSensorManager.unregisterListener(SensorMainActivity.this);
 				}
 			}
 
@@ -198,6 +221,51 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 		}
 
 		return max;
+	}
+	
+	/**
+	 * 取得密码
+	 * 
+	 * @return
+	 */
+	private String getPassword() {
+		SharedPreferences settings = this.getSharedPreferences(
+				LocusPassWordView.name, 0);
+		Log.e(TAG, "NAME : "+LocusPassWordView.name);
+		return settings.getString("password", ""); // , "0,1,2,3,4,5,6,7,8"
+	}
+	
+	/**
+	 * 设置密码
+	 * 
+	 * @param password
+	 */
+	public void resetPassWord(String password) {
+		SharedPreferences settings = this.getSharedPreferences(
+				LocusPassWordView.name, 0);
+		Editor editor = settings.edit();
+		editor.putString("password", password);
+		editor.commit();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		if (SensorMainActivity.validateSuccess == true) {
+			//接下里关闭这项防盗功能
+			SensorMainActivity.validateSuccess = false;
+			btn_switch.setText("开启防盗");
+			Toast.makeText(SensorMainActivity.this, "防盗功能关闭，需要时请重新打开", Toast.LENGTH_SHORT).show();
+			SensorMainActivity.isOn = false;
+			SensorMainActivity.initialTime = false;
+			initialText();
+			
+			startAlarmPlayService(3);
+			
+			mSensorManager.unregisterListener(SensorMainActivity.this);
+		}
+		
 	}
 	
 	@Override
