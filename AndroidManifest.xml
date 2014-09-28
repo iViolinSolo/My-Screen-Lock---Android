@@ -43,29 +43,30 @@
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </activity>
-        
-    	<activity
-      		android:name=".LoginActivity"
+        <activity
+            android:name=".LoginActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-        	android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
-        
         <activity
             android:name=".SetPasswordActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-        	android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
-        
         <activity
             android:name=".LocusMainActivity"
-            android:label="@string/title_activity_locus_main"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-        	android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_locus_main"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
-        
+        <activity
+            android:name="com.eva.me.myscreenlock.sensor.SensorMainActivity"
+            android:label="@string/title_activity_sensor_main"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
     </application>
 
 </manifest>
