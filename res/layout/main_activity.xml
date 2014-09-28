@@ -3,7 +3,8 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center"
+    android:gravity="center_horizontal"
+    android:padding="15dp"
     android:orientation="vertical" 
     android:background="@drawable/welcome_bg">
 
@@ -17,8 +18,14 @@
         android:text="欢迎进入九宫格密码设置界面" >
     </TextView>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+    </FrameLayout>
+
     <TextView
-        android:id="@+id/tvOpen"
+        android:id="@+id/tvSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -29,6 +36,11 @@
         android:background="@drawable/button_selector"
         android:text="打开锁屏" >
     </TextView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp" >
+    </FrameLayout>
     
     <TextView
         android:id="@+id/tvReset"
@@ -42,5 +54,11 @@
         android:background="@drawable/button_selector"
         android:text="重置密码" >
     </TextView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+    </FrameLayout>
 
 </LinearLayout>

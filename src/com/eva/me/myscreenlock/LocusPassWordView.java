@@ -521,7 +521,7 @@ public class LocusPassWordView extends View {
 	 * @return
 	 */
 	private String toPointString() {
-		if (sPoints.size() > passwordMinLength) {
+		if (sPoints.size() >= passwordMinLength) {
 			StringBuffer sf = new StringBuffer();
 			for (Point p : sPoints) {
 				sf.append(",");
@@ -600,7 +600,7 @@ public class LocusPassWordView extends View {
 					&& this.sPoints.size() > 0) {
 				error();
 				clearPassword();
-				Toast.makeText(this.getContext(), "密码太短,请重新输入!",
+				Toast.makeText(this.getContext(), "密码太短,至少连3个点,请重新输入!",
 						Toast.LENGTH_SHORT).show();
 			} else if (mCompleteListener != null) {
 				if (this.sPoints.size() >= passwordMinLength) {

@@ -3,6 +3,7 @@ package com.eva.me.myscreenlock;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import com.eva.me.myscreenlock.LocusPassWordView.OnCompleteListener;
 import com.eva.me.myscreenlock.util.StringUtil;
 
 public class SetPasswordActivity extends Activity {
+	public static String TAG = "SetPasswordActivity";
 	private LocusPassWordView lpwv;
 	private String password;
 	private boolean needverify = true;
@@ -37,6 +39,7 @@ public class SetPasswordActivity extends Activity {
 			@Override
 			public void onComplete(String mPassword) {
 				password = mPassword;
+				Log.e(TAG, "The Password is: "+password);
 				if (needverify) {
 					if (lpwv.verifyPassword(mPassword)) {
 						showToast("密码输入正确,请输入新密码!");
