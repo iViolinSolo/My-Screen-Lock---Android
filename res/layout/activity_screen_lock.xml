@@ -3,13 +3,13 @@
     android:layout_height="fill_parent"
     android:background="@drawable/cfa7jw1dy4zsxpyf6j"
     android:orientation="vertical" >
-
-    <Button
-        android:id="@+id/btn_nulock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="解锁" />
-
+	
+	<FrameLayout android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
+	    android:layout_weight="1" >
+	    
+	</FrameLayout>
+    
     <com.eva.me.myscreenlock.SliderRelativeLayout android:id="@+id/slider_layout"
 	    android:layout_width="fill_parent"
 		android:layout_height="67dp" 
@@ -64,4 +64,5 @@
 
 
 	</com.eva.me.myscreenlock.SliderRelativeLayout>
+
 </LinearLayout>

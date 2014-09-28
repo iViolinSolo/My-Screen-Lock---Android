@@ -1,8 +1,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/welcome_bg" >
 
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:columnCount="2"
+        android:rowCount="2" >
+        
+        <TextView 
+            android:id="@+id/tvStartScrLock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="开启锁屏功能"
+            android:gravity="center"/>
+        
+        <TextView 
+            android:id="@+id/tvStartScrPwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="开启密码功能"
+            android:gravity="center"/>
+        
+        <TextView 
+            android:id="@+id/tvStartScrAlm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="开启防盗功能"
+            android:gravity="center"/>
+        
+        <TextView 
+            android:id="@+id/tvAbout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="关于我们"
+            android:gravity="center"/>
+        
+    </GridLayout>
+
+</LinearLayout>
+
+<!-- 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -91,6 +137,4 @@
             android:layout_height="wrap_content"
             android:text="离开程序"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-    </LinearLayout>
-
-</LinearLayout>
+    </LinearLayout> -->

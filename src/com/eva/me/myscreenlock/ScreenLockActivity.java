@@ -27,7 +27,7 @@ public class ScreenLockActivity extends Activity {
 	public static final String TAG = "ScreenLockActivity";
 	public static final int OP_EXIT_SCREEN = 2;
 //	private static final int FLAG_HOMEKEY_DISPATCHED = 0x80000000;//屏蔽home键
-	private Button btn_test;
+//	private Button btn_test;
 	public static boolean isShow = false;//防止重复开启这个activity
 	
 	//--Start--slide unlock
@@ -64,16 +64,6 @@ public class ScreenLockActivity extends Activity {
 	}
 
 	private void init() {
-		btn_test = (Button) findViewById(R.id.btn_nulock);
-		btn_test.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(ScreenLockActivity.this, "The Screen is unlocked!", Toast.LENGTH_SHORT).show();
-				ScreenLockActivity.this.finish();
-				
-			}
-		});
 		
 		//--Start--slide unlock
 		sliderLayout = (SliderRelativeLayout)findViewById(R.id.slider_layout);
