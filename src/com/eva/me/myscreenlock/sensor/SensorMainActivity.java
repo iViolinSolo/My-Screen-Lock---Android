@@ -48,6 +48,7 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 		textviewZ = (TextView) findViewById(R.id.textView3);
 		textviewF = (TextView) findViewById(R.id.textView4);
 
+		initialText();
 		
 		mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);// TYPE_GRAVITY
@@ -79,12 +80,20 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 					Toast.makeText(SensorMainActivity.this, "防盗功能关闭，需要时请重新打开", Toast.LENGTH_SHORT).show();
 					SensorMainActivity.isOn = false;
 					SensorMainActivity.initialTime = false;
+					initialText();
 					
 					mSensorManager.unregisterListener(SensorMainActivity.this);
 				}
 			}
 		});
 
+	}
+
+	private void initialText() {
+		textviewX.setText("0");
+		textviewY.setText("0");
+		textviewZ.setText("0");
+		textviewF.setText("手机处于安静状态");
 	}
 
 	@Override
