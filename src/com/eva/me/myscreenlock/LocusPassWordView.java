@@ -30,8 +30,11 @@ import com.eva.me.myscreenlock.util.StringUtil;
  * 
  * @author Eva
  * 
+ * @warning String name must be changed
  */
 public class LocusPassWordView extends View {
+	private static final String TAG = "LocusPassWordView";
+	public static String name = "com.eva.me.myscreenlock.LocusPassWordView";
     private float w = 0;
     private float h = 0;
     /**
@@ -120,14 +123,20 @@ public class LocusPassWordView extends View {
 
 	public LocusPassWordView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		LocusPassWordView.name = this.getClass().getName();
+		Log.e(TAG, "NAME: "+ name);
 	}
 
 	public LocusPassWordView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		LocusPassWordView.name = this.getClass().getName();
+		Log.e(TAG, "NAME: "+ name);
 	}
 
 	public LocusPassWordView(Context context) {
 		super(context);
+		LocusPassWordView.name = this.getClass().getName();
+		Log.e(TAG, "NAME: "+ name);
 	}
 
 	@Override
@@ -708,7 +717,8 @@ public class LocusPassWordView extends View {
 	 */
 	private String getPassword() {
 		SharedPreferences settings = this.getContext().getSharedPreferences(
-				this.getClass().getName(), 0);
+				LocusPassWordView.name, 0);
+		Log.e(TAG, "getPassword-> SharedPreference-> name : "+this.getClass().getName());
 		return settings.getString("password", ""); // , "0,1,2,3,4,5,6,7,8"
 	}
 
@@ -740,7 +750,7 @@ public class LocusPassWordView extends View {
 	 */
 	public void resetPassWord(String password) {
 		SharedPreferences settings = this.getContext().getSharedPreferences(
-				this.getClass().getName(), 0);
+				LocusPassWordView.name, 0);
 		Editor editor = settings.edit();
 		editor.putString("password", password);
 		editor.commit();
