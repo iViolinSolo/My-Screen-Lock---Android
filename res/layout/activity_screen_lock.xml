@@ -12,8 +12,9 @@
 
     <com.eva.me.myscreenlock.SliderRelativeLayout android:id="@+id/slider_layout"
 	    android:layout_width="fill_parent"
-		android:layout_height="63dip" 
+		android:layout_height="67dp" 
 		android:layout_gravity="center"
+		android:gravity="center_vertical"
 		android:layout_marginTop="350dip"
 		android:background="@drawable/step2_tip_2"
 		>
@@ -34,6 +35,8 @@
 			android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_marginRight="25dip"
+		    android:layout_centerVertical="true"
+		    android:layout_marginTop="7dp"
 		    android:layout_toLeftOf="@id/getup_finish_ico"
 		    android:layout_alignTop="@id/getup_finish_ico"
 		    android:background="@anim/slider_tip_anim">
@@ -43,7 +46,9 @@
         <TextView  android:layout_width="wrap_content"
 		    android:layout_height="wrap_content" 
 		    android:layout_centerInParent="true"
+		    android:layout_alignBaseline="@id/getup_arrow"
 		    android:layout_toLeftOf="@id/getup_arrow"
+		    android:layout_marginTop="6dp"
 		    android:layout_marginRight="10dip"
 		    android:layout_alignTop="@id/getup_finish_ico"
 		    android:text="@string/hint_unlock">
