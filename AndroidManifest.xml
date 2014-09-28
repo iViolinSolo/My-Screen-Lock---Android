@@ -67,6 +67,14 @@
             android:label="@string/title_activity_sensor_main"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
+        
+        <service 
+            android:name="com.eva.me.myscreenlock.sensor.AlarmPlayService"
+            android:enabled="true" >
+            <intent-filter >
+                <action android:name="com.eva.me.myscreenlock.sensor.AlarmPlayService"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

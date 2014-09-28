@@ -2,7 +2,9 @@ package com.eva.me.myscreenlock.sensor;
 
 import java.util.Calendar;
 
+import android.R.integer;
 import android.app.Activity;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -32,6 +34,8 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 	
 	private TextView btn_switch;
 	
+	private Intent staSerIntent =null;
+	
 	public static boolean isOn = false;
 	public static boolean initialTime = true;
 	
@@ -43,12 +47,22 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sensor_main);
+		init();
+	}
+	
+	
+	private void init() {
+		staSerIntent = new Intent("com.eva.me.myscreenlock.sensor.AlarmPlayService");
+		startService(staSerIntent);
+		
 		textviewX = (TextView) findViewById(R.id.textView1);
 		textviewY = (TextView) findViewById(R.id.textView2);
 		textviewZ = (TextView) findViewById(R.id.textView3);
 		textviewF = (TextView) findViewById(R.id.textView4);
 
 		initialText();
+		
+		
 		
 		mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);// TYPE_GRAVITY
@@ -70,6 +84,8 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 					SensorMainActivity.isOn = true;
 					SensorMainActivity.initialTime = true;
 					
+					startAlarmPlayService(-1);
+					
 					// 参数三，检测的精准度
 					mSensorManager.registerListener(SensorMainActivity.this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);// SENSOR_DELAY_GAME
 					
@@ -82,11 +98,22 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 					SensorMainActivity.initialTime = false;
 					initialText();
 					
+					startAlarmPlayService(3);
+					
 					mSensorManager.unregisterListener(SensorMainActivity.this);
 				}
 			}
-		});
 
+		});
+	}
+
+	private void startAlarmPlayService(int op) {
+		//启动播放类的服务
+		if(staSerIntent == null) {
+			staSerIntent = new Intent("com.eva.me.myscreenlock.sensor.AlarmPlayService");
+		}
+		staSerIntent.putExtra("op", op);
+		startService(staSerIntent);
 	}
 
 	private void initialText() {
@@ -141,6 +168,8 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 				lasttimestamp = stamp;
 				Log.e(TAG, " sensor isMoveorchanged....");
 				textviewF.setText("检测手机在移动..");
+				
+				startAlarmPlayService(1);
 			}
 			
 			mX = x;
