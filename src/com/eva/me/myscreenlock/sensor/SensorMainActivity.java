@@ -13,6 +13,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,6 +43,8 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 	
 	private Intent staSerIntent =null;
 	
+	private boolean wantedExit = false;
+
 	public static boolean validateSuccess = false;
 	public static boolean isOn = false;
 	public static boolean initialTime = true;
@@ -107,7 +110,7 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 				} else {
 					//是开启的状态的时候
 					if(SensorMainActivity.validateSuccess == false) {
-						Toast.makeText(SensorMainActivity.this, "请先验证密码在进行关闭", Toast.LENGTH_SHORT).show();
+						Toast.makeText(SensorMainActivity.this, "请先验证密码再进行关闭", Toast.LENGTH_SHORT).show();
 						Intent staLogin = new Intent();
 						staLogin.putExtra("operation", SensorMainActivity.OP_VALIDATE_PSD);
 						staLogin.setClass(SensorMainActivity.this, LoginActivity.class);
@@ -124,7 +127,7 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 						
 						startAlarmPlayService(3);
 						
-						mSensorManager.unregisterListener(SensorMainActivity.this);
+						mSensorManager.unregisterListener(SensorMainActivity.this, mSensor);
 					}
 					
 				}
@@ -258,6 +261,13 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 		Log.e(TAG+"SYS", "===== > onResume()");
 		
 		if (SensorMainActivity.validateSuccess == true) {
+			if (wantedExit) {
+				wantedExit =false;
+				Toast.makeText(SensorMainActivity.this, "验证通过，关闭防盗功能", Toast.LENGTH_SHORT).show();
+				finish();
+				return;
+			}
+			
 			//接下里关闭这项防盗功能
 			SensorMainActivity.validateSuccess = false;
 			btn_switch.setText("开启防盗");
@@ -268,7 +278,7 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 			
 			startAlarmPlayService(3);
 			
-			mSensorManager.unregisterListener(SensorMainActivity.this);
+			mSensorManager.unregisterListener(SensorMainActivity.this, mSensor);
 		}
 		
 	}
@@ -288,6 +298,22 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 	@Override
 	protected void onDestroy() {
 		Log.e(TAG+"SYS", "==== > onDestroy()");
+		//进行垃圾回收机制，终于理解了为什么十分的重要
+		SensorMainActivity.initialTime = true;
+		SensorMainActivity.isOn = false;
+		SensorMainActivity.validateSuccess = false;
+		
+		if (staSerIntent != null) {
+			stopService(staSerIntent);
+			staSerIntent = null;
+			Log.e(TAG+"SYS", "stop service and staSerIntent is not null");
+		}
+		
+		if (mSensor != null) {
+			mSensorManager.unregisterListener(SensorMainActivity.this, mSensor);
+			Log.e(TAG+"SYS", "unregisterListener and mSensor is not null");				
+		}
+		
 		super.onDestroy();
 	}
 	
@@ -309,4 +335,32 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			Log.e(TAG+"SYS", "按动返回键");
+			wantedExit = true;
+			initOnBackKeyPressed();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	private void initOnBackKeyPressed() {
+		if(SensorMainActivity.validateSuccess == false) {
+			Toast.makeText(SensorMainActivity.this, "请先验证密码再进行关闭", Toast.LENGTH_SHORT).show();
+			Intent staLogin = new Intent();
+			staLogin.putExtra("operation", SensorMainActivity.OP_VALIDATE_PSD);
+			staLogin.setClass(SensorMainActivity.this, LoginActivity.class);
+			startActivity(staLogin);
+			
+		}else if (SensorMainActivity.validateSuccess == true) {
+			//接下里关闭这项防盗功能
+			//下面貌似永远进不了
+			Toast.makeText(SensorMainActivity.this, "防盗功能关闭，需要时请重新打开", Toast.LENGTH_SHORT).show();
+			SensorMainActivity.this.finish();
+		}
+	}
+	
 }
