@@ -54,6 +54,8 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.e(TAG+"SYS", "====== > OnCreate()");
+		Log.e(TAG+"SYS", "====== > OnCreate() : initialTime: "+initialTime);
+		Log.e(TAG+"SYS", "====== > OnCreate() : isOn: "+isOn);
 		setContentView(R.layout.activity_sensor_main);
 		init();
 	}
@@ -75,6 +77,7 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 		if (null == mSensorManager) {
 			Log.d(TAG, "deveice not support SensorManager");
 		}
+		
 //		// 参数三，检测的精准度
 //		mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);// SENSOR_DELAY_GAME
 		
@@ -280,6 +283,12 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 	protected void onStop() {
 		Log.e(TAG+"SYS", "==== > onStop()");
 		super.onStop();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		Log.e(TAG+"SYS", "==== > onDestroy()");
+		super.onDestroy();
 	}
 	
 	@Override
