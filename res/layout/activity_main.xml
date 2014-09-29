@@ -1,19 +1,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:padding="5dp"
+    android:background="@drawable/main_bg_7"
     android:gravity="center"
-    android:background="@drawable/welcome_bg" >
+    android:orientation="vertical"
+    android:padding="5dp" >
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="0.5"
         android:gravity="center"
         android:textSize="25dp"
         android:textColor="@android:color/background_light"
-        android:layout_weight="0.5"
         android:text="欢迎使用锁屏精灵"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

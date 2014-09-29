@@ -1,12 +1,17 @@
 package com.eva.me.myscreenlock;
 
+import java.net.ContentHandler;
+
 import com.eva.me.myscreenlock.sensor.SensorMainActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,6 +65,28 @@ public class MainActivity extends Activity {
 				
 			}
 		});
+		
+		Button btnAbout = (Button) findViewById(R.id.button4);
+		btnAbout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				View content = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_about_us_content, null);
+				AlertDialog aboutUsAlertDialog = new AlertDialog.Builder(MainActivity.this)
+					.setTitle("关于我们")
+					.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							return;
+						}
+					})
+					.setView(content)
+					.create();
+				aboutUsAlertDialog.show();
+			}
+		});
+		
 	}
 
 	@Override

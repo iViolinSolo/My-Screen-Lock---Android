@@ -63,12 +63,12 @@ public class LocusMainActivity extends Activity {
 		//重新绘制button
 		if (LocusMainActivity.isOn) {
 			//开启了密码锁屏
-			btnSwitch.setText("关闭密码锁屏功能");
+			btnSwitch.setText("关闭密码\n锁屏功能");
 			btnReset.setVisibility(View.VISIBLE);
 		}else if (!LocusMainActivity.isOn ||  password.equals(LoginActivity.AUTHENTICATION_SUCCESS)) {
 			//如果处于本身就是关闭状态，或者是验证成功之后，就可以直接绘制图片为关闭状态，同时初始化密码
 			//关闭了密码锁屏
-			btnSwitch.setText("打开密码锁屏功能");
+			btnSwitch.setText("打开密码\n锁屏功能");
 			btnReset.setVisibility(View.GONE);
 			//重新赋值为空值
 			password = "";
@@ -95,7 +95,7 @@ public class LocusMainActivity extends Activity {
 					//现在关闭密码锁屏,绘制上面图片
 					StatusUtil.setStatus(false, LocusMainActivity.this);
 					LocusMainActivity.isOn = false;
-					btnSwitch.setText("打开密码锁屏功能");
+					btnSwitch.setText("打开密码\n锁屏功能");
 					Toast.makeText(LocusMainActivity.this, "密码锁屏功能关闭，需要时请重新打开", Toast.LENGTH_SHORT).show();
 					btnReset.setVisibility(View.GONE);
 					//绘制完成，就要进行密码的设为空
@@ -105,7 +105,7 @@ public class LocusMainActivity extends Activity {
 					//现在打开密码锁屏
 					StatusUtil.setStatus(true, LocusMainActivity.this);
 					LocusMainActivity.isOn = true;
-					btnSwitch.setText("关闭密码锁屏功能");
+					btnSwitch.setText("关闭密码\n锁屏功能");
 					Toast.makeText(LocusMainActivity.this, "密码锁屏功能已经开启", Toast.LENGTH_SHORT).show();
 					btnReset.setVisibility(View.VISIBLE);
 					
@@ -166,12 +166,12 @@ public class LocusMainActivity extends Activity {
 		//重新绘制
 		if (LocusMainActivity.isOn) {
 			//开启了密码锁屏
-			btnSwitch.setText("关闭密码锁屏功能");
+			btnSwitch.setText("关闭密码\n锁屏功能");
 			btnReset.setVisibility(View.VISIBLE);
 		}else if (!LocusMainActivity.isOn ||  password.equals(LoginActivity.AUTHENTICATION_SUCCESS)) {
 			//如果处于本身就是关闭状态，或者是验证成功之后，就可以直接绘制图片为关闭状态，同时初始化密码
 			//关闭了密码锁屏
-			btnSwitch.setText("打开密码锁屏功能");
+			btnSwitch.setText("打开密码\n锁屏功能");
 			btnReset.setVisibility(View.GONE);
 			//重新赋值为空值
 			password = "";

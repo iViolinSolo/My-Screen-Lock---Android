@@ -6,16 +6,17 @@
     android:gravity="center_horizontal"
     android:padding="15dp"
     android:orientation="vertical" 
-    android:background="@drawable/welcome_bg">
+    android:background="@drawable/main_bg_7">
 
     <TextView
         android:id="@+id/textViewStatic1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textSize="25dp"
         android:padding="10dip"
         android:textColor="@android:color/background_light"
-        android:text="欢迎进入防盗功能设置界面" >
+        android:text="防盗功能设置界面" >
     </TextView>
 
     <FrameLayout
@@ -29,10 +30,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
+        android:textSize="20dp"
         android:paddingLeft="15dip"
         android:paddingRight="15dip"
         android:textColor="@android:color/white"
-        android:background="@drawable/button_selector"
+        android:background="@drawable/btnface1"
         android:text="开启防盗" >
     </TextView>
 
