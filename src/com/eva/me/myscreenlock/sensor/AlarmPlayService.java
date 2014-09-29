@@ -2,11 +2,9 @@ package com.eva.me.myscreenlock.sensor;
 
 import java.io.IOException;
 
-import android.R.integer;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -44,13 +42,6 @@ public class AlarmPlayService extends Service{
 		Log.e(TAG, "OnStartCommand()");
 		int op = intent.getIntExtra("op", -1);
 		Log.e(TAG, "OnStartCommand --> op: "+op);
-		/**
-		 * case R.id.btn_start: op = 1; break;
-			case R.id.btn_pause: op = 2; break;
-			case R.id.btn_stop: op = 3; break;
-			case R.id.btn_close: op = 4; break;
-			case R.id.btn_exit: op = 5; break;
-		 */
 		switch (op) {
 		case 1:
 			start();
@@ -75,7 +66,6 @@ public class AlarmPlayService extends Service{
 			Log.e(TAG, "OnStartCommand --> "+"ERROR");
 			break;
 		}
-		Log.e(TAG, "onCreate -> return..");
 		
 		return super.onStartCommand(intent, flags, startId);
 	}
@@ -91,9 +81,7 @@ public class AlarmPlayService extends Service{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
 		}
-		
 	}
 	
 	private void pause() {
@@ -104,7 +92,6 @@ public class AlarmPlayService extends Service{
 	}
 
 	private void start() {
-		//TODO check the if condition
 		if(mediaPlayer != null && !mediaPlayer.isPlaying()) {
 			mediaPlayer.start();
 			Log.e(TAG, "start() -> mediaPlayer.start()");

@@ -1,10 +1,5 @@
-package com.eva.me.myscreenlock;
+package com.eva.me.myscreenlock.slide;
 
-import com.eva.me.myscreenlock.SliderRelativeLayout;
-import com.eva.me.myscreenlock.R;
-import com.eva.me.myscreenlock.util.StatusUtil;
-
-import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,12 +11,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.eva.me.myscreenlock.R;
+import com.eva.me.myscreenlock.psdlock.LoginActivity;
+import com.eva.me.myscreenlock.util.StatusUtil;
 
 public class ScreenLockActivity extends Activity {
 	public static final String TAG = "ScreenLockActivity";
@@ -54,7 +50,7 @@ public class ScreenLockActivity extends Activity {
 //		this.getWindow().setFlags(FLAG_HOMEKEY_DISPATCHED, FLAG_HOMEKEY_DISPATCHED); 
 		setContentView(R.layout.activity_screen_lock);
 		
-		this.isShow = true;
+		ScreenLockActivity.isShow = true;
 		init();
 		Log.e(TAG, "ScreenLockActivity Start--> OnCreate");
 		Intent intentTmp = new Intent("com.eva.me.localService");
@@ -75,7 +71,7 @@ public class ScreenLockActivity extends Activity {
 	
 	@Override
 	protected void onDestroy() {
-		this.isShow = false;
+		ScreenLockActivity.isShow = false;
 		super.onDestroy();
 	}
 

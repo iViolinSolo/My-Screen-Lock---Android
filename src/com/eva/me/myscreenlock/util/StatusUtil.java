@@ -5,8 +5,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
-import com.eva.me.myscreenlock.LocusMainActivity;
-import com.eva.me.myscreenlock.LocusPassWordView;
+import com.eva.me.myscreenlock.psdlock.LocusMainActivity;
 
 public class StatusUtil {
 	private static final String TAG= "StatusUtil";

@@ -1,11 +1,12 @@
 package com.eva.me.myscreenlock;
 
 import android.app.Activity;
-import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
+import com.eva.me.myscreenlock.slide.ScreenLockActivity;
 
 public class LocalBroadcastReceiver extends BroadcastReceiver{
 	private static final String TAG = "LocalBroadcastReceiver";

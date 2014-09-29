@@ -21,9 +21,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eva.me.myscreenlock.LocusPassWordView;
-import com.eva.me.myscreenlock.LoginActivity;
 import com.eva.me.myscreenlock.R;
+import com.eva.me.myscreenlock.psdlock.LocusPassWordView;
+import com.eva.me.myscreenlock.psdlock.LoginActivity;
 import com.eva.me.myscreenlock.util.StringUtil;
 
 
@@ -53,6 +53,7 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.e(TAG+"SYS", "====== > OnCreate()");
 		setContentView(R.layout.activity_sensor_main);
 		init();
 	}
@@ -68,7 +69,6 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 		textviewF = (TextView) findViewById(R.id.textView4);
 
 		initialText();
-		
 		
 		mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);// TYPE_GRAVITY
@@ -252,6 +252,8 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 	protected void onResume() {
 		super.onResume();
 		
+		Log.e(TAG+"SYS", "===== > onResume()");
+		
 		if (SensorMainActivity.validateSuccess == true) {
 			//接下里关闭这项防盗功能
 			SensorMainActivity.validateSuccess = false;
@@ -266,6 +268,18 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 			mSensorManager.unregisterListener(SensorMainActivity.this);
 		}
 		
+	}
+	
+	@Override
+	protected void onStart() {
+		Log.e(TAG+"SYS", "======= > onStart() ");
+		super.onStart();
+	}
+	
+	@Override
+	protected void onStop() {
+		Log.e(TAG+"SYS", "==== > onStop()");
+		super.onStop();
 	}
 	
 	@Override

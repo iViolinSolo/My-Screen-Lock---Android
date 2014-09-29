@@ -1,4 +1,8 @@
-package com.eva.me.myscreenlock;
+package com.eva.me.myscreenlock.slide;
+
+import com.eva.me.myscreenlock.R;
+import com.eva.me.myscreenlock.R.drawable;
+import com.eva.me.myscreenlock.R.id;
 
 import android.content.Context;
 import android.graphics.Bitmap;

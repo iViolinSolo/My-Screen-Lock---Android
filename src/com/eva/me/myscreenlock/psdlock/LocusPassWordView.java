@@ -1,4 +1,4 @@
-package com.eva.me.myscreenlock;
+package com.eva.me.myscreenlock.psdlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.eva.me.myscreenlock.R;
+import com.eva.me.myscreenlock.R.drawable;
 import com.eva.me.myscreenlock.util.BitmapUtil;
 import com.eva.me.myscreenlock.util.MathUtil;
 import com.eva.me.myscreenlock.util.RoundUtil;
@@ -34,7 +36,7 @@ import com.eva.me.myscreenlock.util.StringUtil;
  */
 public class LocusPassWordView extends View {
 	private static final String TAG = "LocusPassWordView";
-	public static String name = "com.eva.me.myscreenlock.LocusPassWordView";
+	public static String name = "com.eva.me.myscreenlock.psdlock.LocusPassWordView";
     private float w = 0;
     private float h = 0;
     /**

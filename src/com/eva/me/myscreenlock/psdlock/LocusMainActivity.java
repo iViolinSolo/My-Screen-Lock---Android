@@ -1,7 +1,9 @@
-package com.eva.me.myscreenlock;
+package com.eva.me.myscreenlock.psdlock;
 
 import com.eva.me.myscreenlock.R;
-import com.eva.me.myscreenlock.SetPasswordActivity;
+import com.eva.me.myscreenlock.R.id;
+import com.eva.me.myscreenlock.R.layout;
+import com.eva.me.myscreenlock.R.menu;
 import com.eva.me.myscreenlock.util.StatusUtil;
 import com.eva.me.myscreenlock.util.StringUtil;
 
@@ -108,7 +110,10 @@ public class LocusMainActivity extends Activity {
 					btnSwitch.setText("关闭密码\n锁屏功能");
 					Toast.makeText(LocusMainActivity.this, "密码锁屏功能已经开启", Toast.LENGTH_SHORT).show();
 					btnReset.setVisibility(View.VISIBLE);
-					
+					//现在存在一个逻辑是如果我关闭的时候 我会把密码赋值为空，那么这个时候既然密码为空，
+					//那么最后可以直接跳转到login那个界面，进行初始化，那么这样在进行一个的锁屏过程中就不会出现空值的情况，就好多了
+					Intent intToLogin = new Intent(LocusMainActivity.this, LoginActivity.class);
+					startActivity(intToLogin);
 				}else {
 					Log.e(TAG, "UNKOWN ERROR! ");
 				}

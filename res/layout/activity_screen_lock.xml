@@ -10,7 +10,7 @@
 	    
 	</FrameLayout>
     
-    <com.eva.me.myscreenlock.SliderRelativeLayout android:id="@+id/slider_layout"
+    <com.eva.me.myscreenlock.slide.SliderRelativeLayout android:id="@+id/slider_layout"
 	    android:layout_width="fill_parent"
 		android:layout_height="67dp" 
 		android:layout_gravity="center"
@@ -63,6 +63,6 @@
 		</TextView>
 
 
-	</com.eva.me.myscreenlock.SliderRelativeLayout>
+	</com.eva.me.myscreenlock.slide.SliderRelativeLayout>
 
 </LinearLayout>

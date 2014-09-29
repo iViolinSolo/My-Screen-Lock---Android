@@ -1,4 +1,4 @@
-package com.eva.me.myscreenlock;
+package com.eva.me.myscreenlock.psdlock;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,8 +10,12 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eva.me.myscreenlock.LocusPassWordView.OnCompleteListener;
+import com.eva.me.myscreenlock.R;
+import com.eva.me.myscreenlock.R.id;
+import com.eva.me.myscreenlock.R.layout;
+import com.eva.me.myscreenlock.psdlock.LocusPassWordView.OnCompleteListener;
 import com.eva.me.myscreenlock.sensor.SensorMainActivity;
+import com.eva.me.myscreenlock.slide.ScreenLockActivity;
 import com.eva.me.myscreenlock.util.StatusUtil;
 
 public class LoginActivity extends Activity {
@@ -89,7 +93,7 @@ public class LoginActivity extends Activity {
 					// 如果密码正确,直接解锁。
 					if (lpwv.verifyPassword(mPassword)) {
 						SensorMainActivity.validateSuccess = true;
-						showToast("解锁成功");
+						showToast("密码验证成功！");
 						finish();
 					} else {
 						showToast("密码输入错误,请重新输入");

@@ -1,4 +1,4 @@
-package com.eva.me.myscreenlock;
+package com.eva.me.myscreenlock.psdlock;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +9,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.eva.me.myscreenlock.LocusPassWordView.OnCompleteListener;
+import com.eva.me.myscreenlock.R;
+import com.eva.me.myscreenlock.R.id;
+import com.eva.me.myscreenlock.R.layout;
+import com.eva.me.myscreenlock.psdlock.LocusPassWordView.OnCompleteListener;
 import com.eva.me.myscreenlock.util.StringUtil;
 
 public class SetPasswordActivity extends Activity {

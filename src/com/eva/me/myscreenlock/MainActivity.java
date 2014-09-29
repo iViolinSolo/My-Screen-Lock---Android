@@ -2,6 +2,7 @@ package com.eva.me.myscreenlock;
 
 import java.net.ContentHandler;
 
+import com.eva.me.myscreenlock.psdlock.LocusMainActivity;
 import com.eva.me.myscreenlock.sensor.SensorMainActivity;
 
 import android.app.Activity;
@@ -59,7 +60,6 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(MainActivity.this, SensorMainActivity.class);
 				startActivity(intent);
 				

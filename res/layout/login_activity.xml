@@ -16,23 +16,24 @@
         android:text="请输入手势密码"
         android:textColor="@android:color/white" />
 
-    <com.eva.me.myscreenlock.LocusPassWordView
+    <com.eva.me.myscreenlock.psdlock.LocusPassWordView
         android:id="@+id/mLocusPassWordView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
-    </com.eva.me.myscreenlock.LocusPassWordView>
+    </com.eva.me.myscreenlock.psdlock.LocusPassWordView>
 
     <Button
         android:id="@+id/tvNoSetPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/button_selector"
+        android:background="@drawable/btnface5"
         android:gravity="center"
         android:paddingLeft="15dip"
         android:paddingRight="15dip"
         android:textColor="@android:color/white"
         android:text="开始绘制"
+        android:textSize="20dp"
         android:visibility="gone" >
     </Button>
 

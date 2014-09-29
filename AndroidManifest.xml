@@ -37,7 +37,7 @@
         </service>
 
         <activity
-            android:name=".ScreenLockActivity"
+            android:name="com.eva.me.myscreenlock.slide.ScreenLockActivity"
             android:label="@string/title_activity_screen_lock"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
             <intent-filter>
@@ -45,19 +45,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="com.eva.me.myscreenlock.psdlock.LoginActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name=".SetPasswordActivity"
+            android:name="com.eva.me.myscreenlock.psdlock.SetPasswordActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar.MinWidth" >
         </activity>
         <activity
-            android:name=".LocusMainActivity"
+            android:name="com.eva.me.myscreenlock.psdlock.LocusMainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_locus_main"
             android:screenOrientation="portrait"
