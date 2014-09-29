@@ -65,6 +65,7 @@ public class LoginActivity extends Activity {
 						StatusUtil.setStatus(false, LoginActivity.this);
 //						Intent iTmp = new Intent(LoginActivity.this, LocusMainActivity.class);
 //						startActivity(iTmp);
+						
 						finish();
 					} else {
 						showToast("密码输入错误,请重新输入");
@@ -81,6 +82,9 @@ public class LoginActivity extends Activity {
 						}else {
 							Log.e(TAG, "UNKONWN ERROR -> mianHandler is null");
 						}
+						//添加一句话，当解锁成功的时候，能够让我们的功能关闭
+						SensorMainActivity.validateSuccess = true;
+						
 						showToast("解锁成功");
 						finish();
 					} else {

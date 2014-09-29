@@ -74,6 +74,7 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 		textviewF = (TextView) findViewById(R.id.textView4);
 
 		initialText();
+		initStaticFieldDefult();
 		
 		mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);// TYPE_GRAVITY
@@ -259,6 +260,7 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 		super.onResume();
 		
 		Log.e(TAG+"SYS", "===== > onResume()");
+		Log.e(TAG+"SYS", "===== > onResume() + SensorMainActivity.validateSuccess :"+SensorMainActivity.validateSuccess );
 		
 		if (SensorMainActivity.validateSuccess == true) {
 			if (wantedExit) {
@@ -299,9 +301,7 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 	protected void onDestroy() {
 		Log.e(TAG+"SYS", "==== > onDestroy()");
 		//进行垃圾回收机制，终于理解了为什么十分的重要
-		SensorMainActivity.initialTime = true;
-		SensorMainActivity.isOn = false;
-		SensorMainActivity.validateSuccess = false;
+		initStaticFieldDefult();
 		
 		if (staSerIntent != null) {
 			stopService(staSerIntent);
@@ -317,6 +317,13 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 		super.onDestroy();
 	}
 	
+	private void initStaticFieldDefult() {
+		SensorMainActivity.initialTime = true;
+		SensorMainActivity.isOn = false;
+		SensorMainActivity.validateSuccess = false;
+	}
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -340,8 +347,13 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			Log.e(TAG+"SYS", "按动返回键");
-			wantedExit = true;
-			initOnBackKeyPressed();
+			if(!SensorMainActivity.isOn) 
+				finish();
+			else {
+				wantedExit = true;
+				initOnBackKeyPressed();
+			}
+			
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
@@ -349,7 +361,7 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 
 	private void initOnBackKeyPressed() {
 		if(SensorMainActivity.validateSuccess == false) {
-			Toast.makeText(SensorMainActivity.this, "请先验证密码再进行关闭", Toast.LENGTH_SHORT).show();
+			Toast.makeText(SensorMainActivity.this, "您真的想要关闭这项功能吗？请验证密码", Toast.LENGTH_SHORT).show();
 			Intent staLogin = new Intent();
 			staLogin.putExtra("operation", SensorMainActivity.OP_VALIDATE_PSD);
 			staLogin.setClass(SensorMainActivity.this, LoginActivity.class);
@@ -362,5 +374,6 @@ public class SensorMainActivity extends Activity implements SensorEventListener 
 			SensorMainActivity.this.finish();
 		}
 	}
+	
 	
 }
