@@ -47,6 +47,7 @@ public class SetPasswordActivity extends Activity {
 					if (lpwv.verifyPassword(mPassword)) {
 						showToast("密码输入正确,请输入新密码!");
 						lpwv.clearPassword();
+						password = "";
 						needverify = false;
 					} else {
 						showToast("错误的密码,请重新输入!");

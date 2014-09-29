@@ -104,7 +104,7 @@ public class LocusMainActivity extends Activity {
 					resetPassWord("");
 					
 				}else if (!LocusMainActivity.isOn) {
-					//现在打开密码锁屏
+					//现在打开密码锁屏,打开锁屏，就肯定是空密码，既然是空密码，就会是一定重新绘制，根据重新绘制的逻辑，当前界面要finish掉才能够不会出现两个activity
 					StatusUtil.setStatus(true, LocusMainActivity.this);
 					LocusMainActivity.isOn = true;
 					btnSwitch.setText("关闭密码\n锁屏功能");
@@ -114,6 +114,7 @@ public class LocusMainActivity extends Activity {
 					//那么最后可以直接跳转到login那个界面，进行初始化，那么这样在进行一个的锁屏过程中就不会出现空值的情况，就好多了
 					Intent intToLogin = new Intent(LocusMainActivity.this, LoginActivity.class);
 					startActivity(intToLogin);
+					finish();
 				}else {
 					Log.e(TAG, "UNKOWN ERROR! ");
 				}
