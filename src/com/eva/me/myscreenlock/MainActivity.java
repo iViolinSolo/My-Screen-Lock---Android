@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	private static String TAG = "MainActivity";
@@ -28,24 +29,23 @@ public class MainActivity extends Activity {
 
 	private void init() {
 		Button btn = (Button) findViewById(R.id.button1);
-		btn.setOnLongClickListener(new OnLongClickListener() {
+		btn.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public boolean onLongClick(View v) {
+			public void onClick(View v) {
 				Intent intent = new Intent("com.eva.me.localService");
 				startService(intent);
-				return false;
+				Toast.makeText(MainActivity.this, "锁屏功能已经开启，关闭屏幕尝试一下吧~", Toast.LENGTH_SHORT).show();
 			}
 		});
 		
 		Button btnStart = (Button) findViewById(R.id.button2);
-		btnStart.setOnLongClickListener(new OnLongClickListener() {
+		btnStart.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public boolean onLongClick(View v) {
+			public void onClick(View v) {
 				Intent intent = new Intent(MainActivity.this, LocusMainActivity.class);
 				startActivity(intent);
-				return false;
 			}
 		});
 		
