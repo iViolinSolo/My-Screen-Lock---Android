@@ -9,6 +9,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Gallery;
+import android.widget.Gallery.LayoutParams;
 import android.widget.ImageView;
 
 public class ScreenLockViewPagerAdpter extends PagerAdapter {
@@ -17,7 +19,7 @@ public class ScreenLockViewPagerAdpter extends PagerAdapter {
 	private Bitmap[] bmps = null;  
     private Drawable[] drawables = new Drawable[size];  
     private List<ImageView> ivList;
-	
+    private LayoutParams params = new Gallery.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 	
 	public ScreenLockViewPagerAdpter(Context context) {
 		this.mContext = context;
@@ -30,6 +32,7 @@ public class ScreenLockViewPagerAdpter extends PagerAdapter {
 		ivList = new ArrayList<ImageView>();
 		for (int i = 0; i < drawables.length; i++) {
 			ImageView iv = new ImageView(context);
+			iv.setLayoutParams(params);
 			iv.setImageDrawable(drawables[i]);
 			ivList.add(iv);
 		}
@@ -42,6 +45,7 @@ public class ScreenLockViewPagerAdpter extends PagerAdapter {
 		ivList = new ArrayList<ImageView>();
 		for (int i = 0; i < bmps.length; i++) {
 			ImageView iv = new ImageView(context);
+			iv.setLayoutParams(params);
 			iv.setImageBitmap(bmps[i]);
 			ivList.add(iv);
 		}
