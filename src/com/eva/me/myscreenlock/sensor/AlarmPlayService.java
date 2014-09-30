@@ -11,7 +11,7 @@ import android.util.Log;
 public class AlarmPlayService extends Service{
 	private static final String TAG  = "AlarmPlayService";
 	private MediaPlayer mediaPlayer = null;
-	private int resID = com.eva.me.myscreenlock.R.raw.apple;
+	private int resID = com.eva.me.myscreenlock.R.raw.alarm;
 	
 	@Override
 	public IBinder onBind(Intent intent) {

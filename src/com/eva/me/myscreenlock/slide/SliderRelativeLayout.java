@@ -4,6 +4,7 @@ import com.eva.me.myscreenlock.R;
 import com.eva.me.myscreenlock.R.drawable;
 import com.eva.me.myscreenlock.R.id;
 
+import android.R.integer;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -65,7 +66,8 @@ public class SliderRelativeLayout extends RelativeLayout {
 		// 该控件主要判断是否处于滑动点击区域。滑动时 处于INVISIBLE(不可见)状态，滑动时处于VISIBLE(可见)状态
 		tv_slider_icon = (TextView) findViewById(R.id.slider_icon);
 	}
-	private int mLastMoveX = 2000;  //当前bitmap应该绘制的地方 ， 初始值为足够大，可以认为看不见	
+	private final int startPos = 2000;
+	private int mLastMoveX = startPos;  //当前bitmap应该绘制的地方 ， 初始值为足够大，可以认为看不见	
 	public boolean onTouchEvent(MotionEvent event) {
 		int x = (int) event.getX();
 		int y = (int) event.getY();
@@ -153,7 +155,7 @@ public class SliderRelativeLayout extends RelativeLayout {
 	}
 	//重置初始的状态，显示tv_slider_icon图像，使bitmap不可见
 	private void resetViewState(){
-		mLastMoveX = 1000 ;
+		mLastMoveX = startPos ;
 		tv_slider_icon.setVisibility(View.VISIBLE);
 		invalidate();        //重绘最后一次
 	}
