@@ -14,7 +14,7 @@
         android:gravity="center"
         android:textSize="25dp"
         android:textColor="@android:color/background_light"
-        android:text="欢迎使用锁屏精灵"
+        android:text="欢迎使用 'All In One'"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout

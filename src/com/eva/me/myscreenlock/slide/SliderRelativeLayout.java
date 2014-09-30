@@ -65,7 +65,7 @@ public class SliderRelativeLayout extends RelativeLayout {
 		// 该控件主要判断是否处于滑动点击区域。滑动时 处于INVISIBLE(不可见)状态，滑动时处于VISIBLE(可见)状态
 		tv_slider_icon = (TextView) findViewById(R.id.slider_icon);
 	}
-	private int mLastMoveX = 1000;  //当前bitmap应该绘制的地方 ， 初始值为足够大，可以认为看不见	
+	private int mLastMoveX = 2000;  //当前bitmap应该绘制的地方 ， 初始值为足够大，可以认为看不见	
 	public boolean onTouchEvent(MotionEvent event) {
 		int x = (int) event.getX();
 		int y = (int) event.getY();

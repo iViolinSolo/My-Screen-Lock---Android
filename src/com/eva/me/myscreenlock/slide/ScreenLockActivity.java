@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -49,7 +50,8 @@ public class ScreenLockActivity extends Activity {
 	//-----
 	private ViewPager viewPager;  
     private Bitmap[] bmps = null;  
-    private Drawable[] drawables = new Drawable[5];  
+    private final int len = 13;
+    private Drawable[] drawables = new Drawable[len];  
 	//-----
     
   //--loop--slide unlock
@@ -103,10 +105,18 @@ public class ScreenLockActivity extends Activity {
             drawables[0] = getResources().getDrawable(R.drawable.bg_01);  
             drawables[1] = getResources().getDrawable(R.drawable.bg_02);  
             drawables[2] = getResources().getDrawable(R.drawable.bg_03);  
-            drawables[3] = getResources().getDrawable(R.drawable.bg_04);  
-            drawables[4] = getResources().getDrawable(R.drawable.bg_05);  
+            drawables[3] = getResources().getDrawable(R.drawable.bg_031);  
+            drawables[4] = getResources().getDrawable(R.drawable.bg_04);    
+            drawables[5] = getResources().getDrawable(R.drawable.bg_041);  
+            drawables[6] = getResources().getDrawable(R.drawable.bg_05); 
+            drawables[7] = getResources().getDrawable(R.drawable.bg_051);
+            drawables[8] = getResources().getDrawable(R.drawable.bg_06);  
+            drawables[9] = getResources().getDrawable(R.drawable.bg_061);  
+            drawables[10] = getResources().getDrawable(R.drawable.bg_062);  
+            drawables[11] = getResources().getDrawable(R.drawable.bg_07);  
+            drawables[12] = getResources().getDrawable(R.drawable.bg_08);   
             ScreenLockViewPagerAdpter adapter = new ScreenLockViewPagerAdpter(  
-                    ScreenLockActivity.this, drawables, 5); 
+                    ScreenLockActivity.this, drawables, len); 
             viewPager.setAdapter(adapter);  
         } else {  
             //文件夹不为空则循环遍历加载sd卡指定目录中图片  

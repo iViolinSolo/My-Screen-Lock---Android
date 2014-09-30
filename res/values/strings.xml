@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">锁屏精灵</string>
+    <string name="app_name">All In One</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_screen_lock">ScreenLockActivity</string>
     <string name="hint_unlock">向右滑动解锁</string>
     <string name="title_activity_locus_main">LocusMainActivity</string>
     <string name="title_activity_sensor_main">SensorMainActivity</string>
-    <string name="dialog_about_me_line1">创造团队: GoogleCamp二队</string>
-    <string name="dialog_about_me_line2">团队组成: 许铭淏 陈璐 丁宇笙</string>
+    <string name="dialog_about_me_line1">创造团队: 墨名棋妙</string>
+    <string name="dialog_about_me_line2">团队组成: 许铭淏 陈璐</string>
     <string name="dialog_about_me_line3">学校: 同济大学</string>
     <string name="dialog_about_me_line4">软件介绍: \n
         								 本软件是一个简简单单的锁屏软件，拥有锁屏、加密以及防盗功能</string>

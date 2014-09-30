@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dip"
+        android:textSize="20dp"
         android:gravity="center"
         android:text="请输入手势密码"
         android:textColor="@android:color/white" />
