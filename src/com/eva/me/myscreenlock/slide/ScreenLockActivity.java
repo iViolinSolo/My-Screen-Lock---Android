@@ -1,23 +1,32 @@
 package com.eva.me.myscreenlock.slide;
 
+import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.eva.me.myscreenlock.R;
 import com.eva.me.myscreenlock.psdlock.LoginActivity;
+import com.eva.me.myscreenlock.util.FolderUtil;
 import com.eva.me.myscreenlock.util.StatusUtil;
+import com.eva.me.myscreenlock.viewpager.ScreenLockViewPagerAdpter;
 
 public class ScreenLockActivity extends Activity {
 	public static final String TAG = "ScreenLockActivity";
@@ -36,6 +45,12 @@ public class ScreenLockActivity extends Activity {
 	
     public static int MSG_LOCK_SUCESS = 1;
 	public static int MSG_AUTHENTICATION_SUCCESS = 2;
+	
+	//-----
+	private ViewPager viewPager;  
+    private Bitmap[] bmps = null;  
+    private Drawable[] drawables = new Drawable[5];  
+	//-----
     
   //--loop--slide unlock
     
@@ -67,11 +82,76 @@ public class ScreenLockActivity extends Activity {
     	imgView_getup_arrow = (ImageView)findViewById(R.id.getup_arrow);
     	animArrowDrawable = (AnimationDrawable) imgView_getup_arrow.getBackground() ;
     	//--Start--slide unlock
+    	
+    	initViewPager();
 	}
 	
+	private void initViewPager() {
+		FolderUtil.initFolder();
+		initControl();
+		autoSwitch();
+	}
+
+	private void initControl() { 
+        viewPager = (ViewPager) findViewById(R.id.viewpager);  
+        File f = new File(FolderUtil.getSaveFolder());  
+        File[] files = f.listFiles();// 得到所有子目录  
+        bmps = new Bitmap[files.length];  
+          
+        //如果文件夹为空，则从资源文件加载图片  
+        if (files.length == 0) {  
+            drawables[0] = getResources().getDrawable(R.drawable.bg_01);  
+            drawables[1] = getResources().getDrawable(R.drawable.bg_02);  
+            drawables[2] = getResources().getDrawable(R.drawable.bg_03);  
+            drawables[3] = getResources().getDrawable(R.drawable.bg_04);  
+            drawables[4] = getResources().getDrawable(R.drawable.bg_05);  
+            ScreenLockViewPagerAdpter adapter = new ScreenLockViewPagerAdpter(  
+                    ScreenLockActivity.this, drawables, 5); 
+            viewPager.setAdapter(adapter);  
+        } else {  
+            //文件夹不为空则循环遍历加载sd卡指定目录中图片  
+            for (int i = 0; i < files.length; i++) {  
+                String path = files[i].getAbsolutePath();
+                bmps[i] = BitmapFactory.decodeFile(path);  
+                Log.d("PDA", "====H===" + path);  
+  
+            }  
+            ScreenLockViewPagerAdpter adapter = new ScreenLockViewPagerAdpter(  
+            		ScreenLockActivity.this, bmps, files.length);  
+            viewPager.setAdapter(adapter);  
+  
+        }  
+  
+    }  
+	
+	/** 图片定时自动切换 */  
+    private void autoSwitch() {  
+        int interval = 3000;  
+        Timer timer = new Timer();  
+        TimerTask task = new TimerTask() {  
+  
+            @Override  
+            public void run() {  
+                Message message = new Message();  
+                handler.sendMessage(message);  
+            }  
+        };  
+        timer.schedule(task, interval, interval);  
+    } 
+
 	@Override
 	protected void onDestroy() {
 		ScreenLockActivity.isShow = false;
+		
+		//将bitmap回收，尽量避免OOM  
+        if (bmps != null) {  
+            for (int i = 0; i < bmps.length; i++) {  
+                bmps[i].recycle();  
+            }  
+        } else {  
+            return;  
+        } 
+		
 		super.onDestroy();
 	}
 
@@ -97,6 +177,18 @@ public class ScreenLockActivity extends Activity {
 			mHandler.postDelayed(AnimationDrawableTask, 300);
 		}
 	};
+	
+	Handler handler = new Handler() {  
+		  
+        @Override  
+        public void handleMessage(Message msg) {  
+            int currentPage = viewPager.getCurrentItem();  
+            int tempNum = bmps.length == 0 ? drawables.length : bmps.length;  
+            int nextPage = (currentPage + 1) % tempNum;  
+            viewPager.setCurrentItem(nextPage);  
+            super.handleMessage(msg);  
+        }  
+    };
 	
 	private Handler mHandler =new Handler (){
 		

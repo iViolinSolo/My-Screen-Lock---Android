@@ -1,21 +1,19 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/cfa7jw1dy4zsxpyf6j"
-    android:orientation="vertical" >
+    android:layout_height="fill_parent" >
+
+	<android.support.v4.view.ViewPager 
+	    android:id="@+id/viewpager"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" >
+			    
+	</android.support.v4.view.ViewPager>
 	
-	<FrameLayout android:layout_height="wrap_content"
-	    android:layout_width="wrap_content"
-	    android:layout_weight="1" >
-	    
-	</FrameLayout>
-    
-    <com.eva.me.myscreenlock.slide.SliderRelativeLayout android:id="@+id/slider_layout"
+	<com.eva.me.myscreenlock.slide.SliderRelativeLayout android:id="@+id/slider_layout"
 	    android:layout_width="fill_parent"
 		android:layout_height="67dp" 
-		android:layout_gravity="center"
+		android:layout_alignBottom="@id/viewpager"
 		android:gravity="center_vertical"
-		android:layout_marginTop="350dip"
 		android:background="@drawable/step2_tip_2"
 		>
 
@@ -50,6 +48,7 @@
 		    android:layout_toLeftOf="@id/getup_arrow"
 		    android:layout_marginTop="6dp"
 		    android:layout_marginRight="10dip"
+        	android:textColor="@android:color/background_light"
 		    android:layout_alignTop="@id/getup_finish_ico"
 		    android:text="@string/hint_unlock">
 		</TextView>
@@ -64,5 +63,6 @@
 
 
 	</com.eva.me.myscreenlock.slide.SliderRelativeLayout>
-
-</LinearLayout>
+	
+	
+</RelativeLayout>
