@@ -66,6 +66,7 @@ public class SliderRelativeLayout extends RelativeLayout {
 		// 该控件主要判断是否处于滑动点击区域。滑动时 处于INVISIBLE(不可见)状态，滑动时处于VISIBLE(可见)状态
 		tv_slider_icon = (TextView) findViewById(R.id.slider_icon);
 	}
+	
 	private final int startPos = 2000;
 	private int mLastMoveX = startPos;  //当前bitmap应该绘制的地方 ， 初始值为足够大，可以认为看不见	
 	public boolean onTouchEvent(MotionEvent event) {
@@ -74,14 +75,17 @@ public class SliderRelativeLayout extends RelativeLayout {
 		Log.i(TAG, "onTouchEvent" + " X is " + x + " Y is " + y);
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
+			Log.e(TAG, "OnTouchEvent: ACTION_DOWN");
 			mLastMoveX = (int) event.getX();
 			//处理Action_Down事件：  判断是否点击了滑动区域
 			return handleActionDownEvenet(event);
 		case MotionEvent.ACTION_MOVE:
+			Log.e(TAG, "OnTouchEvent: ACTION_MOVE");
 			mLastMoveX = x; //保存了X轴方向
             invalidate(); //重新绘制			    
 			return true;
 		case MotionEvent.ACTION_UP:
+			Log.e(TAG, "OnTouchEvent: ACTION_UP");
 			//处理Action_Up事件：  判断是否解锁成功，成功则结束我们的Activity ；否则 ，缓慢回退该图片。
 			handleActionUpEvent(event);
 			return true;
