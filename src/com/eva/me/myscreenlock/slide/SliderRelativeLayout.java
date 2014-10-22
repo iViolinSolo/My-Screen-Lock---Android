@@ -65,6 +65,7 @@ public class SliderRelativeLayout extends RelativeLayout {
 		super.onFinishInflate();
 		// 该控件主要判断是否处于滑动点击区域。滑动时 处于INVISIBLE(不可见)状态，滑动时处于VISIBLE(可见)状态
 		tv_slider_icon = (TextView) findViewById(R.id.slider_icon);
+		Log.wtf(TAG, "Top"+tv_slider_icon.getTop()+" Left "+tv_slider_icon.getLeft());
 	}
 	
 	private final int startPos = 2000;
